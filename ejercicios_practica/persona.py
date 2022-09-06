@@ -54,6 +54,24 @@ def report(limit=0, offset=0):
     return json_result_list
 
 
+def dashboard():
+    query = db.session.query(Persona)
+    resultados_query = query.all()
+    
+    if resultados_query is None or len(resultados_query) == 0:
+        # Tomado del Ejemplo de Clase 4, archivo heart.py 
+        print('La consulta no tiene resultados.')
+        return []
+
+    # Para cada registro en persona.db se buscan:
+    # El id de cada registro (x) y la respectiva edad (y).
+    # Se retornan x e y.
+    x = [a.id for a in resultados_query]
+    y = [b.age for b in resultados_query]
+
+    return x, y
+
+
 if __name__ == "__main__":
     print("Test del modulo heart.py")
 
